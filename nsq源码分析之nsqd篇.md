@@ -7,6 +7,7 @@
     - [命令](#命令)
     - [传输协议](#传输协议)
     - [消息存储协议](#消息存储协议)
+    - [集群（nsqlookup）](#集群nsqlookup)
 
 ### 名词解释
 + topic：消息分组，一个topic既为一个消息分组，一个消息分组内可以包含多个频道。
@@ -237,3 +238,8 @@ nsqd支持的命令
         return &msg, nil
     }
    ```
+
+### 集群（nsqlookup）
+nsq的集群由nsqlookup提供服务发现, nsq开启集群需要nsqd启动时指定nsqlookup的网络地址。这样nsqd成功启动后，nsqlookup就保留了nsqd的节点信息。在集群模式下消费者需要订阅topic时只需要连接到nsqlookup，由nsqlookup查询topic所在节点，然后消费者直接和topic所在节点建立通信。nsqlookup在整个过程中保存节点信息，为消费者提供服务发现。  
+
+需要注意的是生产者发布消息的话仍然需要连接到具体的实体节点，nsqlookup并不具备自动分发消息的能力。

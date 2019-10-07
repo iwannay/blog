@@ -1,13 +1,14 @@
 # nsq源码分析之nsqd篇
 
 
-- [nsq源码分析之nsqd篇](#nsq源码分析之nsqd篇)
-    - [名词解释](#名词解释)
-    - [架构设计](#架构设计)
-    - [命令](#命令)
-    - [传输协议](#传输协议)
-    - [消息存储协议](#消息存储协议)
-    - [集群（nsqlookup）](#集群nsqlookup)
+- [nsq源码分析之nsqd篇](#nsq%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90%e4%b9%8bnsqd%e7%af%87)
+    - [名词解释](#%e5%90%8d%e8%af%8d%e8%a7%a3%e9%87%8a)
+    - [架构设计](#%e6%9e%b6%e6%9e%84%e8%ae%be%e8%ae%a1)
+    - [消息流转](#%e6%b6%88%e6%81%af%e6%b5%81%e8%bd%ac)
+    - [命令](#%e5%91%bd%e4%bb%a4)
+    - [传输协议](#%e4%bc%a0%e8%be%93%e5%8d%8f%e8%ae%ae)
+    - [消息存储协议](#%e6%b6%88%e6%81%af%e5%ad%98%e5%82%a8%e5%8d%8f%e8%ae%ae)
+    - [集群（nsqlookup）](#%e9%9b%86%e7%be%a4nsqlookup)
 
 ### 名词解释
 + topic：消息分组，一个topic既为一个消息分组，一个消息分组内可以包含多个频道。
@@ -16,6 +17,10 @@
 + flight：在nsq中凡是推送到客户端的且未被finished的msg在nsqd消息所在的channel中被记作fligth。读者朋友阅读源码时当看到flight就要明白这条msg还没有被finished。
 
 ### 架构设计
+
+### 消息流转
+
+![alt 消息流转](./flow.png)
 
 ### 命令
 nsq客户端与服务器端通信采用命令通信  
